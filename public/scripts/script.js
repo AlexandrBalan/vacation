@@ -1,7 +1,6 @@
 const form = document.getElementById("vacation-form");
 
 form.addEventListener("submit", function (event) {
-  event.preventDefault();
   clearErrors();
   let isValid = true;
 
@@ -25,9 +24,8 @@ form.addEventListener("submit", function (event) {
     isValid = false;
   }
 
-  if (isValid) {
-    successMessage.textContent = "Searching trips to " + destination + "!";
-    form.reset();
+  if (!isValid) {
+    event.preventDefault();
   }
 });
 
