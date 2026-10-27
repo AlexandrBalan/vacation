@@ -1,27 +1,31 @@
-const express = require("express");
-const path = require("path");
+// import the express module
+import express from 'express';
 
+// create an instance of an express application
 const app = express();
-const PORT = 3000;
 
-app.use(express.static(path.join(__dirname, "public")));
+// define a port number for our server to listen on
+const PORT = 3002;
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "views", "home.html"));
+// enable static file serving
+app.use(express.static('public'));
+
+// defining a default route ("/")
+app.get('/', (req, res) => {
+    res.sendFile(`${import.meta.dirname}/views/home.html`);
 });
 
-app.get("/about", (req, res) => {
-  res.sendFile(path.join(__dirname, "views", "about.html"));
+// defining a second route ("/home") that shows the same page
+app.get('/home', (req, res) => {
+    res.sendFile(`${import.meta.dirname}/views/home.html`);
 });
 
-app.get("/results", (req, res) => {
-  res.sendFile(path.join(__dirname, "views", "results.html"));
-});
-
+// show a message when a page is not found
 app.use((req, res) => {
-  res.status(404).send("Page not found");
+    res.status(404).send('Page not found');
 });
 
+// start the server on the designated port
 app.listen(PORT, () => {
-  console.log("Server running at http://localhost:" + PORT);
+    console.log(`Server is running at http://localhost:${PORT}`);
 });
