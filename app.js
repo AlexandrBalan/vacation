@@ -5,7 +5,7 @@ import express from 'express';
 const app = express();
 
 // define a port number for our server to listen on
-const PORT = 3002;
+const PORT = 3005;
 
 // enable static file serving
 app.use(express.static('public'));
