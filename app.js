@@ -10,6 +10,9 @@ const PORT = 3005;
 // enable static file serving
 app.use(express.static('public'));
 
+// read form data sent from the form
+app.use(express.urlencoded({ extended: true }));
+
 // defining a default route ("/")
 app.get('/', (req, res) => {
     res.sendFile(`${import.meta.dirname}/views/home.html`);
@@ -18,6 +21,16 @@ app.get('/', (req, res) => {
 // defining a second route ("/home") that shows the same page
 app.get('/home', (req, res) => {
     res.sendFile(`${import.meta.dirname}/views/home.html`);
+});
+
+// handle the form submission
+app.post('/submit', (req, res) => {
+    res.redirect('/thank-you');
+});
+
+// show the thank you page
+app.get('/thank-you', (req, res) => {
+    res.sendFile(`${import.meta.dirname}/views/thank-you.html`);
 });
 
 // show a message when a page is not found
